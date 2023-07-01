@@ -2,6 +2,7 @@
 #include    <cstdint>
 #include    <limits>
 #include    <numbers>
+#include    <cassert>
 
 #include    <map>
 #include    <set>
