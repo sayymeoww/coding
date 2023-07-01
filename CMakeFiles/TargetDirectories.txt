@@ -1,0 +1,3 @@
+/Users/ikard/Desktop/coding/CMakeFiles/main.dir
+/Users/ikard/Desktop/coding/CMakeFiles/edit_cache.dir
+/Users/ikard/Desktop/coding/CMakeFiles/rebuild_cache.dir
