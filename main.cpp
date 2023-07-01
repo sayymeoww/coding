@@ -30,7 +30,9 @@ int32_t main() {
     cout.tie(0);
 
     //start coding here >.<
-    
+    int a, b;
+    cin >> a >> b;
+    cout << a + b << '\n';
 
     return 0;
 }
