@@ -30,22 +30,7 @@ int32_t main() {
     cout.tie(0);
 
     //start coding here >.<
-    int p, q, ai;
-    cin >> p >> q;
-
-    vector<int> answer;
-    for (int i = 2; i <= q && p > 0; i++) {
-        ai = p * i / q;
-        assert(0 <= ai && ai < i);
-        p = p * i % q;
-        answer.push_back(ai);
-    }
-
-    cout << (int)answer.size() + 1 << '\n';
-
-    for (auto ai : answer) {
-        cout << ai << '\n';
-    }
+    
 
     return 0;
 }
