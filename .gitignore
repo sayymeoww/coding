@@ -3,4 +3,4 @@
 *.ts
 *.cpp.o
 
-CMakeFiles/
+CMakeFiles/main.dir/
