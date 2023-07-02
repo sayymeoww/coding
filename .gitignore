@@ -1,4 +1,6 @@
-*.[c]
-*.[txt]
-*.[ts]
-*.[cpp.o]
+*.c
+*.txt
+*.ts
+*.cpp.o
+
+CMakeFiles/
