@@ -9,5 +9,27 @@
         "filesystem": "cpp",
         "ios": "cpp"
     },
-    "C_Cpp.default.configurationProvider": "ms-vscode.makefile-tools"
+    "C_Cpp.default.configurationProvider": "ms-vscode.makefile-tools",
+    "workbench.colorCustomizations": {
+        "terminal.background": "#FFFFFF",
+        "terminal.foreground": "#333333",
+        "terminalCursor.background": "#333333",
+        "terminalCursor.foreground": "#333333",
+        "terminal.ansiBlack": "#FFFFFF",
+        "terminal.ansiBlue": "#795DA3",
+        "terminal.ansiBrightBlack": "#969896",
+        "terminal.ansiBrightBlue": "#795DA3",
+        "terminal.ansiBrightCyan": "#183691",
+        "terminal.ansiBrightGreen": "#183691",
+        "terminal.ansiBrightMagenta": "#A71D5D",
+        "terminal.ansiBrightRed": "#ED6A43",
+        "terminal.ansiBrightWhite": "#FFFFFF",
+        "terminal.ansiBrightYellow": "#795DA3",
+        "terminal.ansiCyan": "#183691",
+        "terminal.ansiGreen": "#183691",
+        "terminal.ansiMagenta": "#A71D5D",
+        "terminal.ansiRed": "#ED6A43",
+        "terminal.ansiWhite": "#333333",
+        "terminal.ansiYellow": "#795DA3"
+    }
 }
