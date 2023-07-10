@@ -7,7 +7,8 @@
         "string": "cpp",
         "iosfwd": "cpp",
         "filesystem": "cpp",
-        "ios": "cpp"
+        "ios": "cpp",
+        "limits": "cpp"
     },
     "C_Cpp.default.configurationProvider": "ms-vscode.makefile-tools",
     "workbench.colorCustomizations": {

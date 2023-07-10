@@ -18,6 +18,8 @@
 
 //other includes here
 
+#define     in      cin    
+#define     out     cout
 #define     int     long long
 #define     pi      numbers::pi //type : double
 #define     inf     numeric_limits<int>::max()
