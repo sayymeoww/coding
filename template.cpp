@@ -1,4 +1,5 @@
 #include    <iostream>
+#include    <iomanip>
 #include    <cstdint>
 #include    <limits>
 #include    <numbers>
@@ -18,7 +19,7 @@
 
 //other includes here
 
-#define     in      cin    
+#define     in      cin
 #define     out     cout
 #define     int     long long
 #define     pi      numbers::pi //type : double
