@@ -2,5 +2,11 @@
 *.txt
 *.ts
 *.cpp.o
+*.cmake
 
 CMakeFiles/main.dir/
+lib/
+build/
+bin/
+.vscode/
+main.dSYM/
