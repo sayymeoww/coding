@@ -3,6 +3,7 @@
 *.ts
 *.cpp.o
 *.cmake
+*.json
 
 CMakeFiles/main.dir/
 lib/
