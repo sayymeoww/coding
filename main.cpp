@@ -18,13 +18,13 @@
 #include    <bitset>
 #include    <algorithm>
 
-//other includes here
+// ? other includes here
 
 #define     int     long long
 #define     pi      numbers::pi //type : double
 #define     inf     numeric_limits<int>::max()
 
-//other defines here
+// ? other defines here
 
 using namespace std;
 
@@ -33,8 +33,8 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
-    // start coding here
-    // (づ°ω°)づﾐe★゜・。。・゜゜・。。・゜☆゜・。。・゜゜・。。・゜
+    // * start coding here
+    // * (づ°ω°)づﾐe★゜・。。・゜゜・。。・゜☆゜・。。・゜゜・。。・゜
 
     return 0;
 }
