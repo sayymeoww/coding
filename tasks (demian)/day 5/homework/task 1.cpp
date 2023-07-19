@@ -70,7 +70,7 @@ bool check(snake s, int el) {
 
     int u = 0; //ups
     int d = 0; //downs
-    int index = inf;
+    int index = (int)ns.size();
 
     for (int i = 1; i < (int)ns.size(); i++) {
         if (ns[i] < ns[i - 1]) {
@@ -79,10 +79,7 @@ bool check(snake s, int el) {
         }
     }
 
-    if (index == inf)
-        return true;
-
-    ns.erase(ns.begin() + index);
+    ns.erase(ns.begin() + index % (int)ns.size());
 
     for (int i = 1; i < (int)ns.size(); i++) {
         if (ns[i] > ns[i - 1]) u++;
