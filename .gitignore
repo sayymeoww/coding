@@ -11,3 +11,8 @@ build/
 bin/
 .vscode/
 main.dSYM/
+CMakeFiles/
+test.dSYM/
+testing.dSYM/
+Makefile
+main
