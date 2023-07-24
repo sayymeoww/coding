@@ -34,7 +34,7 @@ graph *g;
 int n, m;
 cin >> n >> m;
 
-visited.assign(n);
+visited.assign(n, false);
 g = new graph(n);
 
 for (int i = 0; i < m; i++)
@@ -47,4 +47,4 @@ for (int i = 0; i < m; i++)
 int start;
 cin >> start;
 
-dfs(visited, start);
+g.dfs(visited, start);
