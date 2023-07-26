@@ -48,3 +48,5 @@ int start;
 cin >> start;
 
 g.dfs(visited, start);
+
+// Асимптотика - O(n + m)
