@@ -13,8 +13,7 @@
 int a, b, c, answer = 0;
 cin >> a >> b >> c;
 
-while (a + b != c && a + c != b && b + c != a)
-{
+while (a + b != c && a + c != b && b + c != a) {
     answer++;
     a--;
     b--;

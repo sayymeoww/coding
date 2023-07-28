@@ -28,34 +28,32 @@ cin >> n;
 
 vector<int> powers(n + 2);
 
-for (int i{1}; i <= n; i++)
-{
+for (int i{1}; i <= n; i++) {
     int ai;
     cin >> ai;
     powers[i] = ai;
 }
 
-for (int player{1}; player <= n; player++)
-{
+for (int player{1}; player <= n; player++) {
     int position = player;
     vector<int> way = {position};
 
-    while (true)
-    {
+    while (true) {
         position = position + powers[position];
-        if (position <= 0)
+        if (position <= 0) {
             cout << "L";
-        break;
-        else if (position > n)
-                cout
-            << "R";
-        break;
-        else
-        {
-            if (find(way.begin(), way.end(), position) != way.end() || powers[position] == 0)
-                cout << "U";
             break;
-            else way.push_back(position);
+        } else if (position > n) {
+            cout << "R";
+            break;
+        } else {
+            if (find(way.begin(), way.end(), position) != way.end() ||
+                powers[position] == 0) {
+                cout << "R";
+                break;
+            } else {
+                way.push_back(position);
+            }
         }
     }
 }

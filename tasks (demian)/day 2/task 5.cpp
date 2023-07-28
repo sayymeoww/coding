@@ -29,7 +29,6 @@ k = k % (2 * n + 1);
 
 if (k < n)
     cout << 2 * par + 1 << " " << k + 1 << '\n';
-else
-{
+else {
     cout << 2 * par + 2 << " " << k + 1 - n << '\n';
 }

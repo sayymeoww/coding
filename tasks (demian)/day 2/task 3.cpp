@@ -28,15 +28,13 @@ int n, a, b;
 cin >> n >> a >> b;
 
 int l = 0, r = (a + 3 * b) / n + 1, m;
-while (r - l > 1)
-{
+while (r - l > 1) {
     m = (l + r) / 2;
 
     int upakovka1 = n % 3 * m;
     int upakovka3 = n / 3 * m;
 
-    if (upakovka1 < a)
-        upakovka3 -= (a - upakovka1) / 3;
+    if (upakovka1 < a) upakovka3 -= (a - upakovka1) / 3;
 
     if (upakovka1 <= a && upakovka3 <= b)
         l = m;

@@ -20,8 +20,7 @@ ifstream f("task 1.txt");
 f >> s >> n;
 vector<int> a(n);
 
-for (int i = 0; i < n; i++)
-{
+for (int i = 0; i < n; i++) {
     f >> a[i];
 }
 
@@ -31,10 +30,8 @@ int bag = 0;
 int maxind = 0;
 int ppl = 0;
 
-for (int i = 0; i < n; i++)
-{
-    if (bag + a[i] <= s)
-    {
+for (int i = 0; i < n; i++) {
+    if (bag + a[i] <= s) {
         bag += a[i];
         ppl++;
         maxind = i;
@@ -43,10 +40,8 @@ for (int i = 0; i < n; i++)
 
 int max = a[maxind];
 bag -= max;
-for (int i = maxind + 1; i < n; i++)
-{
-    if (bag + a[i] <= s)
-    {
+for (int i = maxind + 1; i < n; i++) {
+    if (bag + a[i] <= s) {
         max = a[i];
     }
 }

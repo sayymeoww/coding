@@ -1,13 +1,10 @@
-int water(int n, vector<int> array)
-{
+int water(int n, vector<int> array) {
     // создаю вектор пар (элемент, его индекс в изначальном массиве)
     vector<pair<int, int>> pairs(n);
-    for (int i = 0; i < n; i++)
-        pairs[i] = {array[i], i};
+    for (int i = 0; i < n; i++) pairs[i] = {array[i], i};
 
     // сортирую по убыванию
-    auto lambda = [](pair<int, int> a, pair<int, int> b)
-    {
+    auto lambda = [](pair<int, int> a, pair<int, int> b) {
         return a.first > b.first;
     };
     sort(pairs.begin(), pairs.end(), lambda);
@@ -19,23 +16,17 @@ int water(int n, vector<int> array)
 
     // cur - размер отдельной ямы с водой
     int cur, answer = 0;
-    for (int i = 1; i < n; i++)
-    {
+    for (int i = 1; i < n; i++) {
         int el = pairs[i].first;
         int id = pairs[i].second;
 
-        if (id > r)
-        {
+        if (id > r) {
             cur = (id - r - 1) * el;
             r = id;
-        }
-        else if (id < l)
-        {
+        } else if (id < l) {
             cur = (l - id - 1) * el;
             l = id;
-        }
-        else
-        {
+        } else {
             cur = -el;
         }
         answer += cur;
@@ -48,7 +39,6 @@ int n;
 cin >> n;
 
 vector<int> array(n);
-for (int i = 0; i < n; i++)
-    cin >> array[i];
+for (int i = 0; i < n; i++) cin >> array[i];
 
 cout << water(n, array) << '\n';

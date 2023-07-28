@@ -15,15 +15,13 @@ f >> n;
 
 int a, b, c, d = inf;
 int x, y;
-for (int i = 0; i < n; i++)
-{
+for (int i = 0; i < n; i++) {
     f >> a >> b >> c;
     x = max({a, b, c});
     s += x;
     y = min({a, b, c});
 
-    if ((x - y) % 109 != 0)
-        d = min(d, (x - y));
+    if ((x - y) % 109 != 0) d = min(d, (x - y));
 
     if ((2 * x - (a + b + c) + y) % 109 != 0)
         d = min(d, 2 * x - (a + b + c) + y);

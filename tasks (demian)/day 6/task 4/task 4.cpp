@@ -2,10 +2,8 @@ int n;
 cin >> n;
 
 int d = 1;
-for (int i = sqrt(n); i >= 2; i++)
-{
-    if (n % i == 0)
-    {
+for (int i = sqrt(n); i >= 2; i++) {
+    if (n % i == 0) {
         d = i;
         break;
     }

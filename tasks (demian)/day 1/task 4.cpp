@@ -12,23 +12,19 @@
 
 int del, countdel, a, count = 0, i = 500000000;
 
-while (count < 5)
-{
+while (count < 5) {
     a = i / 2;
     del = 1;
     countdel = 0;
 
-    for (int j{2}; j <= a; j++)
-    {
-        if (i % j == 0)
-        {
+    for (int j{2}; j <= a; j++) {
+        if (i % j == 0) {
             countdel++;
             del *= j;
 
             if (del > i)
                 break;
-            else if (countdel == 5)
-            {
+            else if (countdel == 5) {
                 cout << i << " ";
                 count++;
             }

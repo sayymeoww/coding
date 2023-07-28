@@ -26,25 +26,21 @@ cin >> n >> m >> d;
 
 vector<vector<int>> v(n, vector<int>(m));
 
-while (d--)
-{
+while (d--) {
     int xi, yi;
     cin >> xi >> yi;
 
     for (int i{0}; i < xi; i++)
-        for (int j{0}; j < yi; j++)
-            v[i][j]++;
+        for (int j{0}; j < yi; j++) v[i][j]++;
 }
 
 int max = 0, answer = 0;
 for (int i{0}; i < n; i++)
     for (int j{0}; j < m; j++)
-        if (v[i][j] > max)
-            max = v[i][j];
+        if (v[i][j] > max) max = v[i][j];
 
 for (int i{0}; i < n; i++)
     for (int j{0}; j < m; j++)
-        if (v[i][j] == max)
-            answer++;
+        if (v[i][j] == max) answer++;
 
 cout << answer << " " << max << '\n';
