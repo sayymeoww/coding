@@ -26,6 +26,21 @@
 
 using namespace std;
 
+struct init {
+    init() {
+        ios_base::sync_with_stdio(0);
+        cin.tie(0);
+        cout.tie(0);
+
+        cout << fixed << setprecision(10);
+    }
+
+    ~init() {
+        cerr << "time: " << 1000 * static_cast<double>(clock()) / CLOCKS_PER_SEC
+             << " ms\n";
+    }
+} init;
+
 int32_t main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
