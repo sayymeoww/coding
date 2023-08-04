@@ -24,20 +24,21 @@
 
 // ? other defines here
 
+using namespace std;
+
 struct init {
-    init() { std::cout << std::fixed << std::setprecision(10); }
+    init() { cout << fixed << setprecision(10); }
 
     ~init() {
-        std::cerr << "⌛ time: "
-                  << 1000 * static_cast<double>(clock()) / CLOCKS_PER_SEC
-                  << " ms\n";
+        cerr << "⌛ time: "
+             << 1000 * static_cast<double>(clock()) / CLOCKS_PER_SEC << " ms\n";
     }
 } init;
 
 int32_t main() {
-    std::ios_base::sync_with_stdio(0);
-    std::cin.tie(0);
-    std::cout.tie(0);
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
 
     // * start coding here
     // * (づ°ω°)づﾐe★゜・。。・゜゜・。。・゜☆゜・。。・゜゜・。。・゜
