@@ -1,41 +1,3 @@
-#include <algorithm>
-#include <bitset>
-#include <cassert>
-#include <cmath>
-#include <cstdint>
-#include <cstring>
-#include <deque>
-#include <fstream>
-#include <iomanip>
-#include <iostream>
-#include <limits>
-#include <map>
-#include <numbers>
-#include <queue>
-#include <set>
-#include <string>
-#include <vector>
-
-// ? other includes here
-
-#define int long long
-#define pi numbers::pi  // type : double
-#define inf numeric_limits<int>::max()
-
-// ? other defines here
-
-using namespace std;
-
-struct init {
-        init() { cout << fixed << setprecision(10); }
-
-        ~init() {
-            cerr << "⌛ time: "
-                 << 1000 * static_cast<double>(clock()) / CLOCKS_PER_SEC
-                 << " ms\n";
-        }
-} init;
-
 bool check(vector<int> a, int p, int k, int index) {
     vector<bool> white((int)a.size(), false);
     white[index] = true;
@@ -91,27 +53,16 @@ int solve(vector<int> a, int p, int k) {
     return answer;
 }
 
-int32_t main() {
-    ios_base::sync_with_stdio(0);
-    cin.tie(0);
-    cout.tie(0);
+int n, q;
+cin >> n >> q;
 
-    // * start coding here
-    // * (づ°ω°)づﾐe★゜・。。・゜゜・。。・゜☆゜・。。・゜゜・。。・゜
+vector<int> a(n);
+for (int i = 0; i < n; i++) {
+    cin >> a[i];
+}
 
-    int n, q;
-    cin >> n >> q;
-
-    vector<int> a(n);
-    for (int i = 0; i < n; i++) {
-        cin >> a[i];
-    }
-
-    while (q--) {
-        int p, k;
-        cin >> p >> k;
-        cout << solve(a, p, k) << '\n';
-    }
-
-    return 0;
+while (q--) {
+    int p, k;
+    cin >> p >> k;
+    cout << solve(a, p, k) << '\n';
 }
