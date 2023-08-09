@@ -26,13 +26,15 @@
 
 using namespace std;
 
-struct init {
-    init() { cout << fixed << setprecision(10); }
+class init {
+    public:
+        init() { cout << fixed << setprecision(10); }
 
-    ~init() {
-        cerr << "⌛ time: "
-             << 1000 * static_cast<double>(clock()) / CLOCKS_PER_SEC << " ms\n";
-    }
+        ~init() {
+            cerr << "⌛ time: "
+                 << 1000 * static_cast<double>(clock()) / CLOCKS_PER_SEC
+                 << " ms\n";
+        }
 } init;
 
 int32_t main() {
