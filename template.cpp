@@ -22,6 +22,8 @@
 #define pi numbers::pi  // type : double
 #define inf numeric_limits<int>::max()
 
+#define debug(x) cout << (#x) << " -> " << x << '\n';
+
 // ? other defines here
 
 using namespace std;
