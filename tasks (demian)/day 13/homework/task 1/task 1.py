@@ -1,55 +1,6 @@
-""" 
-                    [Структура node]
-    
-            parentL                 parentR
-        (r - 1, c - 1)          (r  -  1,   c)
-                        (r, c)
-        (r  +  1,   c)          (r + 1, c + 1)
-            childL                  childR
-
-    Текущая вершина: current = node(r, c)
-
-    Краевые случаи: if current.c == 0:
-                        current.parentL = null
-                    if current.r == current.c:
-                        current.parentR = null
-
-    В остальных случаях:
-        Создаем и присоединяем левую вершину:
-            current.childL = node(r + 1, c)
-            current.childL.parentR = current
-        
-        Создаем и присоединяем правую вершину:
-            current.childR = node(r + 1, c + 1)
-            current.childR.parentL = current
-    
-    * Благодаря такой конструкции мы сможем поддерживать 
-    * структуру дерева одной вершиной, а также искать вершины 
-    * и находить наименьшего общего предка двух вершин.
-
-    
-                    [Структура tree]
-    
-    Структура поддерживает всего одну вершину: root = node(0, 0)
-
-    Доступ ко всем другим вершинам обеспечивается поиском
-    вершины по ее детям.
-
-    Алгоритм:
-        * допустим мы ищем вершинку node(a, b)
-        
-        1. Начинаем в корне дерева
-        2. Спускаемся по правым детям b раз,
-           таким образом дойдя до вершины node(b, b)
-        3. Спускаемся по левым детям a - b раз
-        4. В конце мы дойдем до вершины node(a, b)
-        5. Конец
-
-    Асимптотика: O(h), где h - высота дерева
-"""
+""" Структура вершины """
 
 
-# Структура вершины
 class node:
     def __init__(self, row: int, column: int):
         # Связи
@@ -58,7 +9,7 @@ class node:
         self.childLeft: node = None
         self.childRight: nide = None
 
-        # Координаы
+        # Координаты
         self.row = row
         self.column = column
 
@@ -68,7 +19,7 @@ class node:
             return False
         return self.row == other.row and self.column == other.column
 
-    # Присоединени
+    # Присоединение
     def connect(self, other, type: int):
         if type == 0:  # лево
             self.childLeft = other
@@ -86,9 +37,12 @@ class node:
             self.childRight.parentLeft = None
             self.childRight = None
 
-    # Вывод координат вершины
+    # Вывод координаты вершины
     def view(self) -> (int, int):
         return (self.row, self.column)
+
+
+""" Блок вспомогательных функций """
 
 
 # Нижняя вершина из двух
@@ -119,10 +73,14 @@ def right(a: node, b: node) -> node:
     return b
 
 
-# Структура дерева
+""" Структура дерева """
+
+
 class tree:
     # Корневая вершина
-    root = node(0, 0)
+    root: node = node(0, 0)
+    path: set = set()
+    visited: set = set()
 
     # Спуск в самую нижнюю левую вершину
     def downToLeft(self, current: node) -> node:
@@ -143,20 +101,10 @@ class tree:
 
         if current.column == 0:
             current.connect(node(current.row + 1, current.column), 0)
-            # current.childLeft = node(current.row + 1, current.column)
-            # current.childLeft.parentRight = current
-
             current.connect(node(current.row + 1, current.column + 1), 1)
-            # current.childRight = node(current.row + 1, current.column + 1)
-            # current.childRight.parentLeft = current
         else:
             current.connect(current.parentLeft.childLeft.childRight, 0)
-            # current.childLeft = current.parentLeft.childLeft.childRight
-            # current.parentLeft.childLeft.childRight.parentRight = current
-
             current.connect(node(current.row + 1, current.column + 1), 1)
-            # current.childRight = node(current.row + 1, current.column + 1)
-            # current.childRight.parentLeft = current
 
         self.moveToRight(self.jumpToRight(current))
 
@@ -167,20 +115,13 @@ class tree:
         if height == 1:  # у корня есть два ребенка
             # Обрабатываем связи
             self.root.connect(node(1, 0), 0)
-            # self.root.childLeft = node(1, 0)
-            # self.root.childLeft.parentRight = self.root
-
             self.root.connect(node(1, 1), 1)
-            # self.root.childRight = node(1, 1)
-            # self.root.childRight.parentLeft = self.root
         else:
             self.build(1)
             height -= 1
-
             while height > 0:
                 self.moveToRight(self.downToLeft(self.root))
                 height -= 1
-
         return
 
     # Вывод дерева
@@ -207,14 +148,70 @@ class tree:
         self.view(now.childRight)
         print()
 
+    # Подъем на вершину вверх
+    def up(self, current: node) -> node:
+        if current.parentLeft != None:
+            return current.parentLeft
+        return current.parentRight
+
     # Поиск вершины
     def find(self, target: node, current: node) -> node:
+        if target.row == target.column:
+            while target != current:
+                current = current.childRight
+            return current
         if target == current:
             return current
 
-        if current.column < target.column:
-            return self.find(target, current.childRight)
-        return self.find(target, current.childLeft)
+        left: node = current.childLeft
+        right: node = current.childRight
+
+        if (current.row, current.column) in self.visited:
+            if left == None and right == None:
+                return self.find(target, self.up(current))
+            elif left == None:
+                if (right.row, right.column) in visited:
+                    return self.find(target, self.up(current))
+                else:
+                    return self.find(target, current.childRight)
+            elif right == None:
+                if (left.row, left.column) in self.visited:
+                    return self.find(target, self.up(current))
+                else:
+                    return self.find(target, current.childLeft)
+            else:
+                if (left.row, left.column) in self.visited and (
+                    right.row,
+                    right.column,
+                ) in self.visited:
+                    return self.find(target, self.up(current))
+                elif (left.row, left.column) in self.visited:
+                    return self.find(target, current.childRight)
+                return self.find(target, current.childLeft)
+        else:
+            self.visited.add((current.row, current.column))
+
+            if current == self.root:
+                if (left.row, left.column) in self.visited:
+                    return self.find(target, current.childRight)
+                else:
+                    return self.find(target, current.childLeft)
+            else:
+                if left == None and right == None:
+                    return self.find(target, self.up(current))
+                while (
+                    current.childLeft.row,
+                    current.childLeft.column,
+                ) in self.visited and (
+                    current.childRight.row,
+                    current.childRight.column,
+                ) in self.visited:
+                    current = self.up(current)
+
+                if left != None:
+                    return self.find(target, current.childLeft)
+                else:
+                    return self.find(target, current.childRight)
 
     # Двигаем две вершины вверх если те находятся на одном уровне
     def moveUp(self, first: node, second: node) -> (int, int):
@@ -272,7 +269,10 @@ class tree:
     # Поиск наименьшего общего предка
     def lca(self, first: node, second: node) -> (int, int):
         first = self.find(first, self.root)
+        self.visited = set()
+
         second = self.find(second, self.root)
+        self.visited = set()
 
         if first == second:
             return (first.row, first.column)
@@ -293,16 +293,82 @@ class tree:
             remove(second, first)
         else:
             first = self.find(first, self.root)
+            self.visited.clear()
+
             second = self.find(second, self.root)
+            self.visited.clear()
 
             if first.column == second.column:
                 first.delete(0)
             else:
                 first.delete(1)
 
+    # Удаление ненужных ребер
+    def removeEdges(self, current: node, visited: set):
+        if (
+            (current.row, current.column),
+            (current.row + 1, current.column),
+        ) in visited and (
+            (current.row, current.column),
+            (current.row + 1, current.column + 1),
+        ) in visited:
+            self.removeEdges(current.childLeft, visited)
+            self.removeEdges(current.childRight, visited)
+        else:
+            if (
+                (current.row, current.column),
+                (current.row + 1, current.column),
+            ) in visited:
+                self.remove(
+                    node(current.row, current.column),
+                    node(current.row + 1, current.column + 1),
+                )
+                self.removeEdges(current.childLeft, visited)
+            elif (
+                (current.row, current.column),
+                (current.row + 1, current.column + 1),
+            ) in visited:
+                self.remove(
+                    node(current.row, current.column),
+                    node(current.row + 1, current.column),
+                )
+                self.removeEdges(current.childRight, visited)
+            else:
+                return
+
+
+# Генерация всех ребер
+def generate(n: int, changes: list) -> set:
+    path = [1] * n
+    answer = set()
+
+    for i in range(n):
+        answer.add(((i, i), (i + 1, i + 1)))
+
+    for i in range(n):
+        x, y = 0, 0
+        path[changes[i] - 1] = 0
+        for rot in path:
+            if rot == 1:
+                answer.add(((x, y), (x + 1, y + 1)))
+                y += 1
+            else:
+                answer.add(((x, y), (x + 1, y)))
+            x += 1
+
+    return sorted(answer)
+
 
 Tree: tree = tree()
 n = int(input())
 
 Tree.build(n)
-Tree.view()
+
+Tree.path = generate(n, list(map(int, input().split())))
+Tree.removeEdges(Tree.root, Tree.path)
+# Tree.view()
+
+q = int(input())
+for _ in range(q):
+    a, b, c, d = map(int, input().split())
+    print(Tree.lca(node(a, b), node(c, d)))
