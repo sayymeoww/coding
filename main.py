@@ -48,6 +48,8 @@
     Асимптотика: O(h), где h - высота дерева
 """
 
+from typing import NoReturn
+
 
 # Структура вершины
 class node:
@@ -208,13 +210,8 @@ class tree:
         print()
 
     # Поиск вершины
-    def find(self, target: node, current: node) -> node:
-        if target == current:
-            return current
-
-        if current.column < target.column:
-            return self.find(target, current.childRight)
-        return self.find(target, current.childLeft)
+    def find(self, target: node, current: node, able=[1, 1]) -> node:
+        pass
 
     # Двигаем две вершины вверх если те находятся на одном уровне
     def moveUp(self, first: node, second: node) -> (int, int):
@@ -300,9 +297,68 @@ class tree:
             else:
                 first.delete(1)
 
+    def removeEdges(self, current: node, visited: set):
+        if (
+            (current.row, current.column),
+            (current.row + 1, current.column),
+        ) in visited and (
+            (current.row, current.column),
+            (current.row + 1, current.column + 1),
+        ) in visited:
+            self.removeEdges(current.childLeft, visited)
+            self.removeEdges(current.childRight, visited)
+        else:
+            if (
+                (current.row, current.column),
+                (current.row + 1, current.column),
+            ) in visited:
+                self.remove(
+                    node(current.row, current.column),
+                    node(current.row + 1, current.column + 1),
+                )
+                self.removeEdges(current.childLeft, visited)
+            elif (
+                (current.row, current.column),
+                (current.row + 1, current.column + 1),
+            ) in visited:
+                self.remove(
+                    node(current.row, current.column),
+                    node(current.row + 1, current.column),
+                )
+                self.removeEdges(current.childRight, visited)
+            else:
+                return
+
+
+def generate(n: int, changes: list) -> set:
+    path = [1] * n
+    answer = set()
+
+    for i in range(n):
+        answer.add(((i, i), (i + 1, i + 1)))
+
+    for i in range(n):
+        x, y = 0, 0
+        path[changes[i] - 1] = 0
+        for rot in path:
+            if rot == 1:
+                answer.add(((x, y), (x + 1, y + 1)))
+                y += 1
+            else:
+                answer.add(((x, y), (x + 1, y)))
+            x += 1
+
+    return sorted(answer)
+
 
 Tree: tree = tree()
 n = int(input())
 
 Tree.build(n)
-Tree.view()
+Tree.removeEdges(Tree.root, generate(n, list(map(int, input().split()))))
+# Tree.view()
+
+q = int(input())
+for _ in range(q):
+    a, b, c, d = map(int, input().split())
+    print(Tree.lca(node(a, b), node(c, d)))
