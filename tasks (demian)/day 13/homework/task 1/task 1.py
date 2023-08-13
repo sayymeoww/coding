@@ -1,3 +1,6 @@
+import sys
+
+sys.setrecursionlimit(1000000000)
 """ Структура вершины """
 
 
@@ -7,7 +10,7 @@ class node:
         self.parentLeft: node = None
         self.parentRight: node = None
         self.childLeft: node = None
-        self.childRight: nide = None
+        self.childRight: node = None
 
         # Координаты
         self.row = row
@@ -156,62 +159,41 @@ class tree:
 
     # Поиск вершины
     def find(self, target: node, current: node) -> node:
-        if target.row == target.column:
-            while target != current:
-                current = current.childRight
+        self.visited.add((current.row, current.column))
+        if current == target:
             return current
-        if target == current:
-            return current
-
-        left: node = current.childLeft
-        right: node = current.childRight
-
-        if (current.row, current.column) in self.visited:
-            if left == None and right == None:
-                return self.find(target, self.up(current))
-            elif left == None:
-                if (right.row, right.column) in visited:
-                    return self.find(target, self.up(current))
-                else:
-                    return self.find(target, current.childRight)
-            elif right == None:
-                if (left.row, left.column) in self.visited:
-                    return self.find(target, self.up(current))
-                else:
-                    return self.find(target, current.childLeft)
-            else:
+        if current == None:
+            current = self.up(current)
+            return self.find(target, current)
+        while True:
+            left = current.childLeft
+            right = current.childRight
+            if left != None and right != None:
                 if (left.row, left.column) in self.visited and (
                     right.row,
                     right.column,
                 ) in self.visited:
-                    return self.find(target, self.up(current))
+                    current = self.up(current)
+                    continue
                 elif (left.row, left.column) in self.visited:
                     return self.find(target, current.childRight)
-                return self.find(target, current.childLeft)
-        else:
-            self.visited.add((current.row, current.column))
-
-            if current == self.root:
-                if (left.row, left.column) in self.visited:
+                else:
+                    return self.find(target, current.childLeft)
+            elif left == None and right != None:
+                if (right.row, right.column) in self.visited:
+                    current = self.up(current)
+                    continue
+                else:
                     return self.find(target, current.childRight)
+            elif right == None and left != None:
+                if (left.row, left.column) in self.visited:
+                    current = self.up(current)
+                    continue
                 else:
                     return self.find(target, current.childLeft)
             else:
-                if left == None and right == None:
-                    return self.find(target, self.up(current))
-                while (
-                    current.childLeft.row,
-                    current.childLeft.column,
-                ) in self.visited and (
-                    current.childRight.row,
-                    current.childRight.column,
-                ) in self.visited:
-                    current = self.up(current)
-
-                if left != None:
-                    return self.find(target, current.childLeft)
-                else:
-                    return self.find(target, current.childRight)
+                break
+        return self.find(target, self.up(current))
 
     # Двигаем две вершины вверх если те находятся на одном уровне
     def moveUp(self, first: node, second: node) -> (int, int):
@@ -366,9 +348,9 @@ Tree.build(n)
 
 Tree.path = generate(n, list(map(int, input().split())))
 Tree.removeEdges(Tree.root, Tree.path)
-# Tree.view()
 
 q = int(input())
 for _ in range(q):
     a, b, c, d = map(int, input().split())
-    print(Tree.lca(node(a, b), node(c, d)))
+    x, y = Tree.lca(node(a, b), node(c, d))
+    print(x, y)
