@@ -46,52 +46,5 @@ int32_t main() {
     // * start coding here
     // * (づ°ω°)づﾐe★゜・。。・゜゜・。。・゜☆゜・。。・゜゜・。。・゜
 
-    const int size = 200000;
-    vector<vector<bool>> visited(size, vector<bool>(size));
-    vector<vector<int>> d(size, vector<int>(size));
-
-    int n, m, k;
-    cin >> n >> m >> k;
-
-    for (int i = 0; i < m; i++) {
-        int l, r, p;
-        cin >> l >> r >> p;
-
-        for (int j = l - 1; j < r - 1; j++) visited[p - 1][j] = true;
-    }
-
-    for (int i = 0; i < k; i++) {
-        for (int j = n - 2; j >= 0; j--) {
-            if (visited[i][j])
-                d[i][j] = 0;
-            else
-                d[i][j] = d[i][j + 1] + 1;
-        }
-    }
-
-    int q, s, t;
-    cin >> q;
-
-    for (int i = 0; i < q; i++) {
-        cin >> s >> t;
-
-        int p = s - 1;
-        int ans = 0;
-
-        while (p < t - 1) {
-            int best = -1;
-            for (int j = 0; j < k; j++)
-                if (best < d[j][p]) best = d[j][p];
-            if (best == 0) break;
-            ans++;
-            p += best;
-        }
-
-        if (p >= t - 1)
-            cout << ans << '\n';
-        else
-            cout << -1 << '\n';
-    }
-
     return 0;
 }
