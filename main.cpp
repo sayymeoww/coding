@@ -52,6 +52,9 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    fstream cin("input.txt");
+    ofstream cout("output.txt");
+
     // * start coding here
     // * (づ°ω°)づﾐe★゜・。。・゜゜・。。・゜☆゜・。。・゜゜・。。・゜
 
