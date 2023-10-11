@@ -42,9 +42,11 @@ class init {
             double PROGTIME = static_cast<double>(clock()) / CLOCKS_PER_SEC;
             cerr << "⌛ time: " << PROGTIME << " s ";
             if (PROGTIME > TIME)
-                cerr << "[❌ TL ERROR]" << '\n';
+                cerr << "[❌ TL ERROR]"
+                     << "[" << TIME << " s]" << '\n';
             else
-                cerr << "[✅ OK]" << '\n';
+                cerr << "[✅ OK]"
+                     << "[" << TIME << " s]" << '\n';
         }
 } init;
 
