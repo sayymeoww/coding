@@ -46,7 +46,7 @@ class init {
                      << "[" << TIME << " s]" << '\n';
             else
                 cerr << "[✅ OK]"
-                     << "[" << TIME << " s]" << '\n';
+                     << "[" << TIME << " s] << '\n';
         }
 } init;
 
