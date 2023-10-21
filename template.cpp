@@ -2,6 +2,7 @@
 #include <bitset>
 #include <cassert>
 #include <cmath>
+#include <compare>
 #include <cstdint>
 #include <cstring>
 #include <deque>
