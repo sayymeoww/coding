@@ -93,6 +93,8 @@ using namespace std;
 // ! declared program time
 const double TIME = 1;  // in seconds
 
+const int mod = 1e9 + 7;
+
 class init {
     public:
         init() { cout << fixed << setprecision(10); }
