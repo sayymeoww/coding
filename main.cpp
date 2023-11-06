@@ -1,3 +1,4 @@
+// #pragma region pragmas
 #pragma GCC optimize("Ofast")
 #pragma GCC target( \
         "sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx,avx,avx2,tune=native")
@@ -51,6 +52,7 @@
 #pragma GCC optimize("-fexpensive-optimizations")
 #pragma GCC optimize("inline-functions-called-once")
 #pragma GCC optimize("-fdelete-null-pointer-checks")
+// #pragma endregion pragmas
 
 // ? other pragmas
 
