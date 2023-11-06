@@ -111,6 +111,8 @@ class init {
         }
 } init;
 
+// * [˙·٠•●♥ Solution ♥●•٠·˙] * //
+
 signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
     cout.tie(nullptr);
