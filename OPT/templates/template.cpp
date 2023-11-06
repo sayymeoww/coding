@@ -1,3 +1,4 @@
+#pragma region pragmas
 #pragma GCC optimize("Ofast")
 #pragma GCC target( \
         "sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx,avx,avx2,tune=native")
@@ -51,9 +52,11 @@
 #pragma GCC optimize("-fexpensive-optimizations")
 #pragma GCC optimize("inline-functions-called-once")
 #pragma GCC optimize("-fdelete-null-pointer-checks")
+#pragma endregion pragmas
 
 // ? other pragmas
 
+#pragma region includes
 #include <algorithm>
 #include <bitset>
 #include <cassert>
@@ -76,15 +79,18 @@
 #include <stack>
 #include <string>
 #include <vector>
+#pragma endregion includes
 
 // ? other includes here
 
+#pragma region defines
 #define int long long
 #define ll uint64_t
 #define pi numbers::pi  // type : double
 #define inf numeric_limits<int>::max()
 
 #define debug(x) cout << (#x) << " -> " << x << '\n';
+#pragma endregion defines
 
 // ? other defines here
 
@@ -95,6 +101,7 @@ const double TIME = 1;  // in seconds
 
 const int mod = 1e9 + 7;
 
+#pragma region init
 class init {
     public:
         init() { cout << fixed << setprecision(10); }
@@ -110,16 +117,19 @@ class init {
                      << "[" << TIME << " s]" << '\n';
         }
 } init;
+#pragma endregion init
 
 // * [˙·٠•●♥ Solution ♥●•٠·˙] * //
 
 signed main() {
+#pragma region ios
     cin.tie(nullptr)->sync_with_stdio(false);
     cout.tie(nullptr);
     cout.precision(20);
 
     fstream cin("input.txt");
     ofstream cout("output.txt");
+#pragma endregion ios
 
     // * start coding here
     // * (づ°ω°)づﾐe★゜・。。・゜゜・。。・゜☆゜・。。・゜゜・。。・゜
