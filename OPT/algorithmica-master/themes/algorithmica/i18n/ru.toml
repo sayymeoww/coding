@@ -1,0 +1,43 @@
+# https://github.com/Menelion/go-i18n/blob/0518f51fb3d0d0cdbd056b9b3a059e96351368f0/i18n/language/pluralspec.go#L280
+
+[authors]
+one = "автор"
+few = "авторы"
+many = "авторы"
+other = "авторы"
+
+[editors]
+one = "редактор"
+few = "редакторы"
+many = "редакторы"
+other = "редакторы"
+
+[published]
+other = "опубликовано"
+
+[updated]
+other = "обновлено"
+
+[sections]
+other = "статьи раздела"
+
+[search]
+other = "Поиск по сайту…"
+
+[searchCountPrefix]
+other = "Найдено"
+
+[searchCountSuffix]
+other = "страниц"
+
+[prerequisites]
+other = "пререквизиты"
+
+[translations]
+other = "переводы"
+
+[copyright1]
+other = "Copyleft 2017–2022 Algorithmica.org" # {{ .Count / . }}
+
+[copyright2]
+other = "Материалы распространяются под <a href='https://tldrlegal.com/license/creative-commons-attribution-sharealike-4.0-international-(cc-by-sa-4.0)'>CC BY-SA</a>"

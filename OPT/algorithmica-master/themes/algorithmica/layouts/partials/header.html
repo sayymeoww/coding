@@ -1,0 +1,55 @@
+<header>
+  {{ $page := . }}
+  <h1>{{ .Title }}</h1>
+  {{ if not .IsHome }}
+    <div class='info'>
+      {{- if isset .Params "authors" -}}
+        <div>
+          <span>{{ T "authors" (len .Params.Authors) }}</span>
+          {{ range .Params.Authors }}
+            <span>{{ $page.RenderString . }}</span>
+          {{ end }}
+        </div>
+      {{ end }}
+      {{- if isset .Params "editors" -}}
+        <div>
+          <span>{{ T "editors" (len .Params.Editors) }}</span>
+          {{ range .Params.Editors }}
+            <span>{{ . }}</span>
+          {{ end }}
+        </div>
+      {{ end }}
+      {{- if isset .Params "created" -}}
+        <div>
+          <span>{{ T "published" }}</span>
+          <span>{{ .Params.created }}</span>
+        </div>
+      {{ end }}
+      {{- if isset .Params "date" -}}
+        <div>
+          <span>{{ T "updated" }}</span>
+          <span>{{ dateFormat "Jan 2, 2006" .Date }}</span>
+        </div>
+      {{ end }}
+      {{- if isset .Params "prerequisites" -}}
+        <div>
+          <span>{{ T "prerequisites" }}</span>
+          {{ $this := . }}
+          {{ range .Params.Prerequisites }}
+            {{ with $this.GetPage . }}
+              <span><a href='{{.Permalink}}'>{{ .Title }}</a></span>
+            {{ end }}
+          {{ end }}
+        </div>
+      {{ end }}
+      {{- if .IsTranslated -}}
+        <div>
+          <span>{{ T "translations" }}</span>
+          {{ range .Translations }}
+            <span><a href="{{ .Permalink }}">{{ .Lang }}: {{ .Title }}</a></span>
+          {{ end }}
+        </div>
+      {{- end -}}
+    </div>
+  {{ end }}
+</header>

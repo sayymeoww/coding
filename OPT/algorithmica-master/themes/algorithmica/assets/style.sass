@@ -1,0 +1,623 @@
+$font-text: 'Crimson', serif !default
+$font-code: 'Inconsolata', monospace !default
+$font-interface: 'Source Sans', sans, !default
+$font-headings: 'Garamond', serif !default
+$font-color: black !default
+
+$background: white !default
+$borders: 1px solid #eaecef !default
+
+$code-background: #f8f8f8 !default
+$code-border: 1px solid #ddd !default
+$quote-line-color: 0.25em #eee solid !default
+$scrollbar1: #bbb !default
+$scrollbar2: #999 !default
+$scrollbar3: #666 !default
+
+$dimmed: #666 !default
+$section-headers: #0b0080 !default
+$division-headers: inherit !default
+$headers-color: #111 !default
+
+$link-color: #0645ad !default
+$link-hover-color: #06e !default
+$link-active-color: $link-hover-color//#faa700 !default
+
+
+/* fonts */
+@font-face
+  font-family: 'CMU'
+  src: url(fonts/cmu.woff2)
+
+@font-face
+  font-family: 'Merriweather'
+  src: url(fonts/merriweather.woff2)
+
+@font-face
+  font-family: 'Inconsolata'
+  src: url(fonts/inconsolata.woff2)
+
+@font-face
+  font-family: 'Garamond'
+  src: url(fonts/garamond.woff2)
+
+@font-face
+  font-family: "Open Sans"
+  src: url(fonts/opensans.woff2)
+
+@font-face
+  font-family: "Source Sans"
+  src: url(fonts/sourcesans.ttf)
+
+@font-face
+  font-family: "Crimson"
+  src: url(fonts/crimson.ttf)
+
+//@font-face
+//  font-family: "Linux Libertine"
+//  src: url(fonts/linux-libertine.ttf)
+
+/* layout */
+html, body
+  margin: 0
+
+body
+  font-family: $font-text
+  display: flex
+  flex-direction: row
+  background: $background
+  color: $font-color
+
+#sidebar
+  font-family: $font-interface
+  overflow-y: scroll
+  height: 100%
+  position: fixed
+  width: 250px
+  background: $code-background
+
+  &::-webkit-scrollbar  
+    background-color: $background
+    width: 12px
+    //display: none
+
+  &::-webkit-scrollbar-thumb
+    background-color: $scrollbar1
+
+    &:hover
+      background-color: $scrollbar2
+
+    &:active
+      background-color: $scrollbar3
+  
+  &.sidebar-hidden
+    display: none
+    //transition: display 0.3s ease, transform 0.3s ease
+
+  .title
+    font-size: 1.2em
+    font-family: $font-headings
+    text-align: center
+    margin: 20px
+    color: $dimmed
+
+    .divisionAbbr
+      color: $font-color
+      
+      &:hover
+        color: $link-active-color
+
+  ul, ol
+    font-size: 0.9em
+    margin: 0px 0px 0px 10px 
+    padding: 0
+    list-style: none
+
+    li
+      margin: 6px
+
+    a
+      color: $font-color
+
+      &:hover
+        color: $link-active-color
+
+  #active-element
+    //font-weight: bold
+    color: $link-color
+
+    &:hover
+      color: $link-active-color
+
+  // outer list
+  ul
+    > li
+      &:not(.part):not(.ignore-indexing)
+        counter-increment: chapter-counter
+        
+        &::before
+          content: counter(chapter-counter) ". "
+          font-weight: bold
+        
+      &.part
+        color: $dimmed
+        counter-increment: part-counter
+        margin-top: 16px
+        font-size: 18px
+
+        &::before
+          content: counter(part-counter, upper-roman) ". "
+          font-weight: bold
+          color: $headers-color
+    
+    // inner lsit
+    ol li
+      counter-increment: section-counter
+
+      &::before
+        content: counter(chapter-counter) "." counter(section-counter) ". "
+        font-weight: bold
+  
+  .draft, .draft a
+    color: $dimmed
+
+    
+
+#wrapper
+  width: 100%
+  margin-left: 250px
+  //padding: 6px
+  
+  &.sidebar-hidden
+    margin-left: 0
+    //transition: margin-left 0.3s ease, transform 0.3s ease
+
+@media only screen and (max-width: 1200px)
+  #sidebar:not(.sidebar-toggled)
+    display: none
+  
+  #wrapper:not(.sidebar-toggled)
+    margin-left: 0
+
+menu
+  position: sticky
+  z-index: 100
+  top: 0
+
+  display: flex
+  font-family: $font-headings
+  
+  height: 26px
+  background-color: $background
+  justify-content: space-between
+  padding: 14px
+  margin: 0
+  text-align: center
+
+  //.left
+    //position: fixed
+
+  //.right
+    //position: fixed
+    //right: 10px
+
+  img
+    width: 16px
+    opacity: 0.4
+    margin: 4px
+
+    &:hover
+      opacity: 1
+      cursor: pointer
+  
+  .title
+    font-size: 24px
+    margin-top: -4px
+    opacity: 0
+    transition: opacity 0.1s
+
+  &.scrolled
+    border-bottom: $borders
+    
+    .title
+      opacity: 1
+      transition: opacity 0.1s
+
+#search
+  display: none
+  font-family: $font-interface
+
+  input
+    width: 100%
+    padding: 6px
+
+    color: $font-color
+
+    background: $code-background
+    border: $code-border
+
+    &:focus
+      outline: 1px solid $dimmed
+
+  #search-count
+    margin-top: 8px
+    color: $dimmed
+  
+  #search-results
+    margin-top: 6px
+    border-bottom: $borders
+
+    li
+      list-style: none
+      margin: 12px 6px
+
+    p
+      margin-top: 0
+
+/*
+  .github
+    img
+      display: block
+
+    a:not(.github-main)
+      opacity: 0
+      
+    &:hover
+      background: #eee
+      border-radius: 2px
+
+      a
+        opacity: 0.4*/
+
+#TableOfContents
+  display: none // temporary disabled
+  position: fixed
+  left: calc(620px + 50%)
+  top: 170px
+  font-size: 0.9em
+  line-height: 1.25em
+  text-align: left
+  width: 300px
+  border-left: $borders
+  padding: 10px 10px
+
+  &.sidebar-hidden
+    display: none
+    //transition: display 0.3s ease, transform 0.3s ease
+
+  ul
+    margin: 0
+    padding: 0
+    list-style: none
+    li
+      margin: 8px
+
+main
+  min-width: 500px
+  max-width: 850px
+  margin: auto
+  padding: 6px 18px
+
+  // so that the footer is stuck to bottom even if the page is short:
+  min-height: calc(100vh - 168px)
+
+header
+  margin-top: 20px
+
+article
+  font-size: 18px
+  line-height: 1.5
+  text-align: justify
+  padding: 6px
+
+  figure
+    margin: 15px auto
+    text-align: center
+
+    img
+      dispaly: block
+      max-width: 90%
+      max-height: 500px
+      margin-bottom: 4px
+    
+    figcaption
+      font-size: 0.85em
+  
+  div // stuff like youtube attachments
+    margin: 20px auto
+
+.description
+  margin: 4px
+
+.info
+  display: flex
+  flex-wrap: wrap
+  width: 100%
+  margin: 25px 0 10px
+  padding: 10px
+  border-top: $borders
+  border-bottom: $borders
+  font-size: 1em
+  font-family: $font-interface
+
+  &:empty
+    display: none
+
+  div
+    margin-right: 50px
+
+    > span
+      display: block
+      padding: 4px
+
+    span:first-child
+      font-size: 0.75em
+      text-transform: uppercase
+      color: $dimmed
+
+h2 a
+  color: $division-headers
+
+.division
+  display: flex
+  flex-wrap: wrap
+  justify-content: left
+  margin: 0
+  text-align: left
+  width: 100%
+  counter-reset: part-counter
+
+  h3
+    width: 100%
+    margin-top: 20px
+    counter-increment: part-counter
+
+    &::before
+      //content: counter(part-counter, upper-roman) ". "
+
+  section
+    font-family: $font-headings
+    width: 279px
+    margin-top: 6px
+    margin-bottom: 8px
+
+    > a
+      font-size: 20px !important
+
+    a:not(ul a)
+      font-size: 1.45em
+      
+      &:not(:hover)
+        color: $section-headers
+
+    ul
+      margin: 2px 0
+      padding-left: 18px
+      list-style: none
+
+      li:before
+        content: "\2022"
+        font-size: 1em
+        vertical-align: middle
+        position: absolute
+        margin-left: -10px
+        margin-top: 3px
+
+      a
+        font-size: 16px
+        margin-left: 0
+        margin-top: 4px
+
+.nextprev
+  margin: 20px 20px 0
+  line-height: 1.5em
+  display: flex
+
+  .left
+    text-align: left
+    flex: 1
+  
+  .right
+    text-align: right
+    flex: 1
+
+footer
+  flex-shrink: 0;
+  text-align: center
+  opacity: 0.5
+  color: $dimmed
+  font-size: 0.75em
+  margin: 50px 0px 0px
+  padding: 8px
+  line-height: 1.5em
+  font-family: $font-interface
+
+.katex
+  font-size: 1.1em !important
+
+/* headers */
+h1, h2, h3, h4, h5, h6
+  font-family: $font-headings
+  color: $headers-color
+  font-weight: normal
+  line-height: 125%
+  margin-top: 1em
+  margin-bottom: 0em
+
+h1
+  font-size: 2.5em
+  text-align: center
+  margin-top: 0
+  margin-bottom: 20px
+
+h2
+  font-size: 1.75em
+
+h3
+  font-size: 1.5em
+
+h2, h3
+  padding-bottom: 5px
+  border-bottom: $borders
+
+/* special elements */
+ul, ol
+  margin: 0
+
+  li
+    margin: 2px 0px
+
+p
+  margin: 0.5em 0
+
+blockquote
+  color: $dimmed
+  margin: 0
+  padding-left: 1em
+  border-left: $quote-line-color
+
+code:not(pre code)
+  border: $code-border
+  background-color: $code-background
+  border-radius: 3px
+  padding: 2px
+  font-size: 0.75em
+  white-space: nowrap
+
+pre
+  white-space: pre
+  white-space: pre-wrap
+  word-wrap: break-word
+  border: $code-border
+  background-color: $code-background
+  border-radius: 3px
+  padding: 2px
+  padding-left: 8px
+  font-size: 0.85em
+  text-align: left
+
+pre.center-pre
+  text-align: center
+  font-size: 1em
+  background: none
+  border: none
+
+.highlight
+  margin: 0px
+
+table
+  margin: auto
+
+  td, th
+    padding: 2px 6px
+
+.highlight tbody
+  display: block
+  width: 100%
+
+  tr
+    border: $code-border
+    background-color: $code-background
+    border-radius: 3px
+    display: block
+  
+  pre
+    border: none
+    padding: 0
+    white-space: pre
+        
+
+hr
+  border: none
+  border-bottom: $borders
+  margin: 20px 0
+
+/* links */
+.anchor
+  display: block
+  position: relative
+  top: -50px
+  visibility: hidden
+
+a.anchor-link
+  display:
+  color: $dimmed
+  opacity: 0.5
+  margin-left: -0.6em
+  margin-right: 0.15em
+
+  &:hover
+    opacity: 1
+
+a
+  color: $link-color
+  text-decoration: none
+  //white-space: nowrap
+
+  &:hover
+    color: $link-hover-color
+
+  &:active
+    color: $link-active-color
+
+a[href^='http://e-maxx.ru']:before, a[href^='https://e-maxx.ru']:before
+    content: ""
+    display: inline-block
+    position: relative
+    top: 4px
+    width: 20px
+    height: 20px
+    background: url('http://e-maxx.ru/favicon.ico') no-repeat
+    background-size: 18px
+
+/* https://habrahabr.ru/favicon.ico */
+
+a[href^='https://neerc.ifmo.ru']:before
+    content: url('https://neerc.ifmo.ru/favicon.ico')
+    margin-right: 4px
+    position: relative
+    top: 4px
+
+a[href^='https://www.youtube.com']:before, a[href^='https://youtube.com']:before
+    content: url('https://www.youtube.com/favicon.ico')
+    margin-right: 4px
+    position: relative
+    top: 3px
+
+a[href^='https://codeforces.com']:before
+    content: url('http://codeforces.com/favicon.ico')
+    margin-right: 4px
+
+a[href^='https://www.topcoder.com/']:before
+    content: url('https://s3.amazonaws.com/app.topcoder.com/favicon.ico')
+    margin-right: 4px
+
+a[href='']
+    color: black
+    cursor: default
+
+
+/* printing */
+@media print
+  body
+    font-size: 12pt
+    width: 180mm
+    margin: 0
+
+  @page
+    margin: 15mm
+
+  menu, .info, footer, .nextprev, #sidebar
+    display: none
+
+  pre
+    font-size: 0.7em
+
+  #wrapper
+    margin-left: 0
+  
+  header
+    margin-top: 0
+
+  pre, ul, ol
+    page-break-inside: avoid

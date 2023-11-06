@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang='{{ .Site.LanguageCode }}'>
+  {{- partial "head.html" . -}}
+  <body>
+    {{- partial "sidebar.html" . -}}
+    <div id='wrapper' {{ if .Params.HideSidebar }}class='sidebar-hidden sidebar-toggled'{{end}}>
+      {{- partial "buttons.html" . -}}
+      <main>
+        {{ partial "search.html" . }}
+        {{- partial "header.html" . -}}
+        <article>
+          {{- block "main" . }}{{- end }}
+        </article>
+        {{ partial "nextprev.html" . }}
+      </main>
+      {{ partial "footer.html" . }}
+    </div>
+  </body>
+</html>
