@@ -47,10 +47,10 @@ signed main() {
     cin.tie(nullptr)->sync_with_stdio(false);
     cout.tie(nullptr);
     cout.precision(20);
-#pragma endregion ios
 
-    fstream cin("input.txt");
-    ofstream cout("output.txt");
+    fstream cin("file/input.txt");
+    ofstream cout("file/output.txt");
+#pragma endregion ios
 
     // * start coding here
     // * (づ°ω°)づﾐe★゜・。。・゜゜・。。・゜☆゜・。。・゜゜・。。・゜
