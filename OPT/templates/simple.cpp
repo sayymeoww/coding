@@ -20,8 +20,18 @@
 #pragma region defines
 #define int long long
 #define ll uint64_t
+#define pi numbers::pi  // type : double
+#define inf numeric_limits<int>::max()
 
 #define debug(x) cout << (#x) << " -> " << x << '\n';
+
+#define bin(x) 1 << x
+#define log(x) 32 - __builtin_clz(x) - 1
+
+#define all(x) begin(x), end(x)
+#define print(x) \
+    for (auto &el : x) cout << el << " "
+#define sort(x) sort(x.begin(), x.end())
 #pragma endregion defines
 
 // ? other defines
