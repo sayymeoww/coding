@@ -1,3 +1,4 @@
+#pragma region template
 #pragma region includes
 #include <algorithm>
 #include <bitset>
@@ -39,7 +40,7 @@
 const int mod = 1e9 + 7;
 
 using namespace std;
-
+#pragma endregion template
 // * [˙·٠•●♥ Solution ♥●•٠·˙] * //
 
 signed main() {

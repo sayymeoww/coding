@@ -1,3 +1,4 @@
+#pragma region template
 #pragma region pragmas
 #pragma GCC optimize("Ofast")
 #pragma GCC target( \
@@ -126,7 +127,7 @@ class init {
         }
 } init;
 #pragma endregion init
-
+#pragma endregion template
 // * [˙·٠•●♥ Solution ♥●•٠·˙] * //
 
 signed main() {
