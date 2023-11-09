@@ -14,9 +14,10 @@
 #include <stack>
 #include <string>
 #include <vector>
-#pragma endregion includes
 
 // ? other includes
+
+#pragma endregion includes
 
 #pragma region defines
 #define int long long
@@ -33,14 +34,16 @@
 #define print(x) \
     for (auto &el : x) cout << el << " "
 #define sort(x) sort(x.begin(), x.end())
-#pragma endregion defines
 
 // ? other defines
+
+#pragma endregion defines
 
 const int mod = 1e9 + 7;
 
 using namespace std;
 #pragma endregion template
+
 // * [˙·٠•●♥ Solution ♥●•٠·˙] * //
 
 signed main() {

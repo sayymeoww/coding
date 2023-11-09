@@ -53,9 +53,10 @@
 #pragma GCC optimize("-fexpensive-optimizations")
 #pragma GCC optimize("inline-functions-called-once")
 #pragma GCC optimize("-fdelete-null-pointer-checks")
-#pragma endregion pragmas
 
 // ? other pragmas
+
+#pragma endregion pragmas
 
 #pragma region includes
 #include <algorithm>
@@ -80,9 +81,10 @@
 #include <stack>
 #include <string>
 #include <vector>
-#pragma endregion includes
 
 // ? other includes here
+
+#pragma endregion includes
 
 #pragma region defines
 #define int long long
@@ -99,9 +101,10 @@
 #define print(x) \
     for (auto &el : x) cout << el << " "
 #define sort(x) sort(x.begin(), x.end())
-#pragma endregion defines
 
 // ? other defines here
+
+#pragma endregion defines
 
 using namespace std;
 
@@ -128,6 +131,7 @@ class init {
 } init;
 #pragma endregion init
 #pragma endregion template
+
 // * [˙·٠•●♥ Solution ♥●•٠·˙] * //
 
 signed main() {
