@@ -1,28 +1,3 @@
-#include <algorithm>
-#include <bitset>
-#include <cassert>
-#include <cmath>
-#include <compare>
-#include <cstdint>
-#include <cstring>
-#include <deque>
-#include <fstream>
-#include <functional>
-#include <iomanip>
-#include <iostream>
-#include <limits>
-#include <list>
-#include <map>
-#include <numbers>
-#include <queue>
-#include <random>
-#include <set>
-#include <stack>
-#include <string>
-#include <vector>
-
-using namespace std;
-
 const int logn = 18;
 
 int n;
@@ -58,36 +33,32 @@ void build(int N) {
     }
 }
 
-signed main() {
-    cin >> n;
+cin >> n;
 
-    vector<pair<int, int>> a(n);
-    for (int i = 0; i < n; ++i) {
-        cin >> a[i].first;
-        a[i].second = i;
-    }
+vector<pair<int, int>> a(n);
+for (int i = 0; i < n; ++i) {
+    cin >> a[i].first;
+    a[i].second = i;
+}
 
-    sort(a.begin(), a.end());
-    build(n + 2);
+sort(a.begin(), a.end());
+build(n + 2);
 
-    int cur = 0;
-    for (int i = 1; i <= n; ++i) {
-        while (cur < n) {
-            int sj = sum(0, a[cur].second + 2);
-            update(a[cur].second + 2, -1);
-            int p1 = lower_bound(sj - 1), p2 = lower_bound(sj);
+int cur = 0;
+for (int i = 1; i <= n; ++i) {
+    while (cur < n) {
+        int sj = sum(0, a[cur].second + 2);
+        update(a[cur].second + 2, -1);
+        int p1 = lower_bound(sj - 1), p2 = lower_bound(sj);
 
-            if (p2 - p1 > i) {
-                update(a[cur].second + 2, 1);
-                cout << a[cur].first << " ";
+        if (p2 - p1 > i) {
+            update(a[cur].second + 2, 1);
+            cout << a[cur].first << " ";
 
-                break;
-            } else {
-                ++cur;
-            }
+            break;
+        } else {
+            ++cur;
         }
     }
-    cout << '\n';
-
-    return 0;
 }
+cout << '\n';
