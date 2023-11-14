@@ -46,6 +46,26 @@ using namespace std;
 
 // * [˙·٠•●♥ Solution ♥●•٠·˙] * //
 
+using M = map<char, vector<int>>;
+
+M convert(string s) {
+    M answer;
+    for (int i = 0; i < (int)s.size(); i++) {
+        answer[s[i]].push_back(i);
+    }
+    return answer;
+}
+
+bool comp(M a, M b) {
+    for (auto &[key, value] : a) {
+        vector<int> v;
+        set_intersection(a[key].begin(), a[key].end(), b[key].begin(),
+                         b[key].end(), back_inserter(v));
+        if (v.size() != 0) return true;
+    }
+    return false;
+}
+
 signed main() {
 #pragma region ios
     cin.tie(nullptr)->sync_with_stdio(false);
@@ -58,6 +78,24 @@ signed main() {
 
     // * start coding here
     // * (づ°ω°)づﾐe★゜・。。・゜゜・。。・゜☆゜・。。・゜゜・。。・゜
+
+    int q;
+    cin >> q;
+
+    string s;
+    cin >> s;
+
+    M cur = convert(s);
+
+    sort(s);
+    while (next_permutation(s.begin(), s.end())) {
+        if (!comp(convert(s), cur)) {
+            cout << s << '\n';
+            return 0;
+        }
+    }
+
+    cout << -1 << '\n';
 
     return 0;
 }
