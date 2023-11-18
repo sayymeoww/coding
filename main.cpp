@@ -44,23 +44,23 @@ const int mod = 1e9 + 7;
 const int TIME = 1; // in seconds
 using namespace std;
 
-#pragma region init
-class init {
-    public:
-        init() { cout << fixed << setprecision(10); }
+// #pragma region init
+// class init {
+//     public:
+//         init() { cout << fixed << setprecision(10); }
 
-        ~init() {
-            double PROGTIME = static_cast<double>(clock()) / CLOCKS_PER_SEC;
-            cerr << "⌛ time: " << PROGTIME << " s ";
-            if (PROGTIME * 0.9 > TIME)
-                cerr << "[❌ TL ERROR]"
-                     << "[" << TIME << " s]" << '\n';
-            else
-                cerr << "[✅ OK]"
-                     << "[" << TIME << " s]" << '\n';
-        }
-} init;
-#pragma endregion init
+//         ~init() {
+//             double PROGTIME = static_cast<double>(clock()) / CLOCKS_PER_SEC;
+//             cerr << "⌛ time: " << PROGTIME << " s ";
+//             if (PROGTIME * 0.9 > TIME)
+//                 cerr << "[❌ TL ERROR]"
+//                      << "[" << TIME << " s]" << '\n';
+//             else
+//                 cerr << "[✅ OK]"
+//                      << "[" << TIME << " s]" << '\n';
+//         }
+// } init;
+// #pragma endregion init
 #pragma endregion template
 
 // * [˙·٠•●♥ Solution ♥●•٠·˙] * //
@@ -78,6 +78,6 @@ signed main() {
     // * start coding here
     // * (づ°ω°)づﾐe★゜・。。・゜゜・。。・゜☆゜・。。・゜゜・。。・゜
 
-	cout.flush();
-	return 0;
+    cout.flush();
+    return 0;
 }
