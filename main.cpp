@@ -78,5 +78,6 @@ signed main() {
     // * start coding here
     // * (づ°ω°)づﾐe★゜・。。・゜゜・。。・゜☆゜・。。・゜゜・。。・゜
 
-    return 0;
+	cout.flush();
+	return 0;
 }

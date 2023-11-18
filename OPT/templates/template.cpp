@@ -147,5 +147,6 @@ signed main() {
     // * start coding here
     // * (づ°ω°)づﾐe★゜・。。・゜゜・。。・゜☆゜・。。・゜゜・。。・゜
 
+    cout.flush();
     return 0;
 }
