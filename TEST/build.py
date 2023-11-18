@@ -35,14 +35,12 @@ def run(_in: str, _out: str, test: int):
             error += 1
             print("📛 [Test {}] · ———————— failed  ————————   ".format(test))
             print("   ————————————————————————————————————")
-            print("   | Given:")
             print("   | [output.txt]")
             print("   |")
             tab = "   |"
             for line in _c:
                 print(tab, line)
             print("   |")
-            print("   | Expected:")
             print("   | [out {}.txt]".format(test))
             print("   |")
             for line in _o:
