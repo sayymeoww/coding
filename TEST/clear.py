@@ -30,7 +30,7 @@ print()
 
 for file in inputs:
     if check(file):
-        print("{} is clear ✨".format(file[12:]))
+        print("{} is clear ✨".format(file[15:]))
     else:
         with open(file, "wb"):
             log(file, 0.2)
@@ -39,7 +39,7 @@ print()
 
 for file in outputs:
     if check(file):
-        print("{} is clear ✨".format(file[12:]))
+        print("{} is clear ✨".format(file[16:]))
     else:
         with open(file, "wb"):
             log(file, 0.2)
