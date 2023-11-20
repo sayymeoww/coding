@@ -11,21 +11,39 @@ ok = 0
 skipped = 0
 error = 0
 
+first_skip = False
+
 
 # _in - ввод для текущего теста
 # _out - вывод текущего теста
 def run(_in: str, _out: str, test: int):
     global cin, cout, make, command
     global ok, skipped, error
+    global first_skip
 
     # если теста нет - то скипаем
     if os.stat(_in).st_size == 0 or os.stat(_out).st_size == 0:
         time.sleep(0.1)
-        print(
-            "\033[37m│ "
-            + "\033[34m↺"
-            + "\033[37m (Test {}) · ———————— skipped ————————   ".format(test)
-        )
+        if not first_skip:
+            print(
+                "\033[37m╭ "
+                + "\033[34m↺"
+                + "\033[37m (Test {})    ———————— skipped ———————— ╮  ".format(test)
+            )
+            first_skip = True
+        else:
+            if test == 4:
+                print(
+                    "\033[37m╰ "
+                    + "\033[34m↺"
+                    + "\033[37m (Test {})    ———————— skipped ———————— ╯  ".format(test)
+                )
+            else:
+                print(
+                    "\033[37m│ "
+                    + "\033[34m↺"
+                    + "\033[37m (Test {})    ———————— skipped ———————— │  ".format(test)
+                )
         skipped += 1
         time.sleep(0.1)
         return
@@ -36,17 +54,25 @@ def run(_in: str, _out: str, test: int):
         for line in _input:
             _cin.write(line)
 
-        # запускаем программу
-
+    # запускаем программу
+    flag = False
     try:
         subprocess.run(make, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
         subprocess.run(command, timeout=1.1 * progtime)
     except subprocess.TimeoutExpired:
+        flag = True
         error += 1
-        print("╰ \033[31m✘ (Test {}) · ———————— failed! ————————   ".format(test))
+        print("\033[37m╭ · · · · ·  ╮╭                           ╮".format(progtime))
+        print(
+            "╰ \033[31m✘"
+            + "\033[37m (Test {}) ╯╰ ———————— failed! ———————— ╯  ".format(test)
+        )
+        time.sleep(0.1)
         print()
         print(
-            " ? ░" + " " + "\033[3mInfinity loop / TL exception  >{} s".format(progtime)
+            " ? ░"
+            + " "
+            + "\033[37m\033[3mInfinity loop / TL exception".format(progtime)
         )
         print()
         with open(cout, "r") as _cout, open(_out, "r") as _output:
@@ -95,7 +121,9 @@ def run(_in: str, _out: str, test: int):
                 # print("    ———————————————————————————————————")
                 print()
                 time.sleep(0.5)
-                return
+
+    if flag:
+        return
 
     with open(cout, "r") as _cout, open(_out, "r") as _output:
         _o, _c = [], []  # вывод программы и ожидаемый вывод
@@ -108,7 +136,7 @@ def run(_in: str, _out: str, test: int):
             print(
                 "╰ "
                 + "\033[31m✘"
-                + "\033[37m (Test {}) · ———————— failed! ————————   ".format(test)
+                + "\033[37m (Test {}) ╯ ———————— failed! ————————— ╯  ".format(test)
             )
             print()
             # print("    ———————————————————————————————————")
@@ -137,7 +165,7 @@ def run(_in: str, _out: str, test: int):
     print(
         "╰ "
         + "\033[32m✔"
-        + "\033[37m (Test {}) · ———————— passed! ————————   ".format(test)
+        + "\033[37m (Test {}) ╯╰ ———————— passed! ———————— ╯  ".format(test)
     )
     print()
     ok += 1
@@ -148,7 +176,7 @@ def run(_in: str, _out: str, test: int):
 def build():
     global ok, skipped, error
     print()
-    print("\033[37m  ⏳ Testing started...")
+    print("\033[37m  ⏱︎ Testing started...")
     time.sleep(0.2)
     print()
     for i in range(4):
@@ -157,12 +185,12 @@ def build():
         # if error > temp:
         #    break
     print()
-    print("\033[37m  🎉 Testing completed!       ", end="")
+    print("\033[37m  ✔ Testing completed!       ", end="")
     print(
-        "\033[32m✔"
+        "\033[32m  ✔"
         + "\033[37m{}  ".format(ok)
         + "\033[34m↺"
         + "\033[37m{}  ".format(skipped)
         + "\033[31m✘"
-        + "\033[37m{}  ".format(error)
+        + "\033[37m{}".format(error)
     )

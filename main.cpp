@@ -51,11 +51,9 @@ class init {
 
     ~init() {
         double PROGTIME = static_cast<double>(clock()) / CLOCKS_PER_SEC;
-        cerr << "╭ · · · · ·  · ⌛ time: " << PROGTIME << " s ";
-        if (PROGTIME * 0.9 > TIME)
-            cerr << "[" << TIME << " s]" << '\n';
-        else
-            cerr << "[" << TIME << " s]" << '\n';
+        cerr << fixed << setprecision(6)
+             << "╭ · · · · ·  ╮╭ ⌛ time: " << PROGTIME << " s ";
+        cerr << "[" << TIME << " s] ╮" << '\n';
     }
 } init;
 #pragma endregion init
@@ -75,6 +73,10 @@ signed main() {
 
     // * start coding here
     // * (づ°ω°)づﾐe★゜・。。・゜゜・。。・゜☆゜・。。・゜゜・。。・゜
+
+    int a;
+    cin >> a;
+    cout << a << '\n';
 
     cout.flush();
     return 0;
