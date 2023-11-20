@@ -1,9 +1,11 @@
+# trunk-ignore-all(isort)
 import os
 import subprocess
 import time
 from itertools import zip_longest
 
 from data import *
+import colorize as color
 
 ok = 0
 skipped = 0
@@ -19,7 +21,11 @@ def run(_in: str, _out: str, test: int):
     # если теста нет - то скипаем
     if os.stat(_in).st_size == 0 or os.stat(_out).st_size == 0:
         time.sleep(0.1)
-        print("🌀 (Test {}) · ———————— skipped ————————   ".format(test))
+        print(
+            "\033[37m│ "
+            + "\033[34m↺"
+            + "\033[37m (Test {}) · ———————— skipped ————————   ".format(test)
+        )
         skipped += 1
         time.sleep(0.1)
         return
@@ -30,9 +36,66 @@ def run(_in: str, _out: str, test: int):
         for line in _input:
             _cin.write(line)
 
-    # запускаем программу
-    subprocess.run(make, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
-    subprocess.run(command)
+        # запускаем программу
+
+    try:
+        subprocess.run(make, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
+        subprocess.run(command, timeout=1.1 * progtime)
+    except subprocess.TimeoutExpired:
+        error += 1
+        print("╰ \033[31m✘ (Test {}) · ———————— failed! ————————   ".format(test))
+        print()
+        print(
+            " ? ░" + " " + "\033[3mInfinity loop / TL exception  >{} s".format(progtime)
+        )
+        print()
+        with open(cout, "r") as _cout, open(_out, "r") as _output:
+            _o, _c = [], []  # вывод программы и ожидаемый вывод
+            for line in _output:
+                _o.append(line.rstrip())
+            for line in _cout:
+                _c.append(line.rstrip())
+            if len(_c) == 0:
+                print(tab[:3] + color.red(tab[3]) + " (output.txt) Given")
+                print(tab[:3] + color.red(tab[3]))
+                print(tab[:3] + color.red(tab[3]) + " 🦗 cricket sounds..")
+                print(tab[:3] + color.red(tab[3]))
+                print(
+                    tab[:3] + color.red(tab[3]) + " (out {}.txt)  Expected".format(test)
+                )
+                print(tab[:3] + color.red(tab[3]))
+                for line in _o:
+                    print(tab[:3] + color.red(tab[3]), line)
+                print(tab[:3] + color.red(tab[3]))
+                # print("    ———————————————————————————————————")
+                print()
+                time.sleep(0.5)
+                return
+            if _o != _c:
+                print(
+                    "\033[37m"
+                    + tab[:3]
+                    + color.red(tab[3])
+                    + "\033[37m (output.txt) Given",
+                )
+                print(tab[:3] + color.red(tab[3]))
+                for line in _c:
+                    print("\033[37m" + tab[:3] + color.red(tab[3]), line)
+                print("\033[37m" + tab[:3] + color.red(tab[3]))
+                print(
+                    "\033[37m"
+                    + tab[:3]
+                    + color.red(tab[3])
+                    + "\033[37m (out {}.txt)  Expected".format(test)
+                )
+                print("\033[37m" + tab[:3] + color.red(tab[3]))
+                for line in _o:
+                    print("\033[37m" + tab[:3] + color.red(tab[3]), line)
+                print("\033[37m" + tab[:3] + color.red(tab[3]))
+                # print("    ———————————————————————————————————")
+                print()
+                time.sleep(0.5)
+                return
 
     with open(cout, "r") as _cout, open(_out, "r") as _output:
         _o, _c = [], []  # вывод программы и ожидаемый вывод
@@ -42,24 +105,41 @@ def run(_in: str, _out: str, test: int):
             _c.append(line.rstrip())
         if _o != _c:
             error += 1
-            print("📛 (Test {}) · ———————— failed  ————————   ".format(test))
-            print("    ———————————————————————————————————")
-            print("   | (output.txt) Expected")
-            print("   |")
-            tab = "   |"
+            print(
+                "╰ "
+                + "\033[31m✘"
+                + "\033[37m (Test {}) · ———————— failed! ————————   ".format(test)
+            )
+            print()
+            # print("    ———————————————————————————————————")
+            print(
+                "\033[37m" + tab[:3] + color.red(tab[3]) + "\033[37m (output.txt) Given"
+            )
+            print("\033[37m" + tab[:3] + color.red(tab[3]))
             for line in _c:
-                print(tab, line)
-            print("   |")
-            print("   | (out {}.txt)  Given".format(test))
-            print("   |")
+                print("\033[37m" + tab[:3] + color.red(tab[3]), line)
+            print("\033[37m" + tab[:3] + color.red(tab[3]))
+            print(
+                "\033[37m"
+                + tab[:3]
+                + color.red(tab[3])
+                + "\033[37m (out {}.txt)  Expected".format(test)
+            )
+            print("\033[37m" + tab[:3] + color.red(tab[3]))
             for line in _o:
-                print(tab, line)
-            print("   |")
-            print("    ———————————————————————————————————")
+                print("\033[37m" + tab[:3] + color.red(tab[3]), line)
+            print("\033[37m" + tab[:3] + color.red(tab[3]))
+            # print("    ———————————————————————————————————")
+            print()
             time.sleep(0.5)
             return
 
-    print("✅ (Test {}) · ———————— passed! ————————   ".format(test))
+    print(
+        "╰ "
+        + "\033[32m✔"
+        + "\033[37m (Test {}) · ———————— passed! ————————   ".format(test)
+    )
+    print()
     ok += 1
     time.sleep(0.5)
 
@@ -68,10 +148,21 @@ def run(_in: str, _out: str, test: int):
 def build():
     global ok, skipped, error
     print()
-    for i in range(4):
-        temp = error
-        run(inputs[i], outputs[i], i + 1)
-        if error > temp:
-            break
+    print("\033[37m  ⏳ Testing started...")
+    time.sleep(0.2)
     print()
-    print("🎉 Testing completed!     ✅{}, 🌀{}, 📛{}".format(ok, skipped, error))
+    for i in range(4):
+        # temp = error
+        run(inputs[i], outputs[i], i + 1)
+        # if error > temp:
+        #    break
+    print()
+    print("\033[37m  🎉 Testing completed!       ", end="")
+    print(
+        "\033[32m✔"
+        + "\033[37m{}  ".format(ok)
+        + "\033[34m↺"
+        + "\033[37m{}  ".format(skipped)
+        + "\033[31m✘"
+        + "\033[37m{}  ".format(error)
+    )

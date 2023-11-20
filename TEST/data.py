@@ -16,3 +16,6 @@ outputs = [  # выходные тесты
     "TEST/tester/out/out 3.txt",
     "TEST/tester/out/out 4.txt",
 ]
+
+progtime = 1  # ограничение времени исполнения
+tab = "   ░"
