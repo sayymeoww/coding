@@ -74,10 +74,6 @@ signed main() {
     // * start coding here
     // * (づ°ω°)づﾐe★゜・。。・゜゜・。。・゜☆゜・。。・゜゜・。。・゜
 
-    int a;
-    cin >> a;
-    cout << a << '\n';
-
     cout.flush();
     return 0;
 }
