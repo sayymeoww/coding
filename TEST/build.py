@@ -136,7 +136,7 @@ def run(_in: str, _out: str, test: int):
             print(
                 "╰ "
                 + "\033[31m✘"
-                + "\033[37m (Test {}) ╯ ———————— failed! ————————— ╯  ".format(test)
+                + "\033[37m (Test {}) ╯╰ ———————— failed! ———————— ╯  ".format(test)
             )
             print()
             # print("    ———————————————————————————————————")
