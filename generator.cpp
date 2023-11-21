@@ -31,14 +31,20 @@ class Generator {
 };
 #pragma endregion class
 
-inline void test(ofstream& in, ofstream& out) {
+inline void test(ofstream& in, ofstream& out, int t) {
+    cout << "Input "
+         << "(" << t << "): " << '\n';
     // * start coding here
     // * (づ°ω°)づﾐe★゜・。。・゜゜・。。・゜☆゜・。。・゜゜・。。・゜
 }
 
 #pragma region make
-inline void Generator::make(int t = 1) {
-    const size_t n = 4;
+inline void Generator::make(int t) {
+    fstream f("TEST/tests.txt");
+
+    int _n;
+    f >> _n;
+    const size_t n = _n;
 
     vector<ofstream> in;
     in.reserve(n);
@@ -48,7 +54,7 @@ inline void Generator::make(int t = 1) {
     out.reserve(n);
     for (size_t i = 0; i < n; i++) out.push_back(ofstream(cout[i], ios::out));
 
-    for (int i = 0; i < t; i++) test(in[i], out[i]);
+    for (int i = 0; i < t; i++) test(in[i], out[i], i + 1);
 }
 #pragma endregion make
 
@@ -59,6 +65,8 @@ int main() {
 
     int t;
     cin >> t;
+
+    cout << "Еnter your input test data here!" << '\n';
 
     Generator gen;
     gen.make(t);

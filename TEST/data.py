@@ -4,18 +4,21 @@ cout = "file/output.txt"  # вывод
 make = "make"  # команда для компиляции
 command = "./main"  # команда для запуска
 
-inputs = [  # входные тесты
-    "TEST/tester/in/in 1.txt",
-    "TEST/tester/in/in 2.txt",
-    "TEST/tester/in/in 3.txt",
-    "TEST/tester/in/in 4.txt",
-]
-outputs = [  # выходные тесты
-    "TEST/tester/out/out 1.txt",
-    "TEST/tester/out/out 2.txt",
-    "TEST/tester/out/out 3.txt",
-    "TEST/tester/out/out 4.txt",
-]
+input_template = "TEST/tester/in/in {}.txt"
+output_template = "TEST/tester/out/out {}.txt"
+
+in_path = "TEST/tester/in"
+out_path = "TEST/tester/out"
 
 progtime = 1  # ограничение времени исполнения
 tab = "   ░"
+
+tests = 0  # количество тестов
+
+
+def setup() -> int:
+    k = 0
+    with open("TEST/tests.txt") as f:
+        for line in f:
+            k = int(line.rstrip())
+    return k
