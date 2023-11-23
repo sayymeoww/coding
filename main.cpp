@@ -67,8 +67,8 @@ signed main() {
     cout.tie(nullptr);
     cout.precision(20);
 
-    fstream cin("file/input.txt");
-    ofstream cout("file/output.txt");
+    // fstream cin("file/input.txt");
+    // ofstream cout("file/output.txt");
 #pragma endregion ios
 
     // * start coding here
