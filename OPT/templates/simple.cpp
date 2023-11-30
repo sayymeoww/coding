@@ -45,17 +45,17 @@ const int TIME = 1;  // in seconds
 using namespace std;
 
 #pragma region init
-class init {
-   public:
-    init() { cout << fixed << setprecision(10); }
+// class init {
+//    public:
+//     init() { cout << fixed << setprecision(10); }
 
-    ~init() {
-        double PROGTIME = static_cast<double>(clock()) / CLOCKS_PER_SEC;
-        cerr << fixed << setprecision(6)
-             << "╭ · · · · ·  ╮╭ ⌛ time: " << PROGTIME << " s ";
-        cerr << "[" << TIME << " s] ╮" << '\n';
-    }
-} init;
+//     ~init() {
+//         double PROGTIME = static_cast<double>(clock()) / CLOCKS_PER_SEC;
+//         cerr << fixed << setprecision(6)
+//              << "╭ · · · · ·  ╮╭ ⌛ time: " << PROGTIME << " s ";
+//         cerr << "[" << TIME << " s] ╮" << '\n';
+//     }
+// } init;
 #pragma endregion init
 #pragma endregion template
 
