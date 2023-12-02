@@ -7,5 +7,5 @@ q = int(s**0.5) + 1
 
 for k in range(q, 1, -1):
     if s % k == 0:
-        print(k)
+        print(s // k)
         break
