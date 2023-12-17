@@ -15,6 +15,10 @@ test.dSYM/
 CMakeFiles/
 testing.dSYM/
 CMakeFiles/main.dir/
+file/
+gen.dSYM/
+.trunk/
+.github/
 
 #файлы
 main
