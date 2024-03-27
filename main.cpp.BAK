@@ -61,15 +61,19 @@ using namespace std;
 
 // * [˙·٠•●♥ Solution ♥●•٠·˙] * //
 
+int f(int a) {
+    return a;
+}
+
 signed main() {
-#pragma region ios
+    #pragma region ios
     cin.tie(nullptr)->sync_with_stdio(false);
     cout.tie(nullptr);
     cout.precision(20);
 
     // fstream cin("file/input.txt");
     // ofstream cout("file/output.txt");
-#pragma endregion ios
+    #pragma endregion ios
 
     // * start coding here
     // * (づ°ω°)づﾐe★゜・。。・゜゜・。。・゜☆゜・。。・゜゜・。。・゜
